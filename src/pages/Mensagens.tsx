@@ -214,35 +214,45 @@ export default function Mensagens() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredMensagens.map((msg, index) => (
-                  <TableRow key={index} className="hover:bg-slate-50/50 transition-colors">
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        {getStatusIcon(msg.status)}
-                        <Badge className={`${getStatusColor(msg.status)} border`}>
-                          {msg.status || "N/A"}
-                        </Badge>
-                      </div>
-                    </TableCell>
-                    <TableCell className="font-medium text-slate-900">
-                      {msg.nome_cliente || "N/A"}
-                    </TableCell>
-                    <TableCell className="text-slate-700">
-                      {msg.corretor_envio || "N/A"}
-                    </TableCell>
-                    <TableCell className="font-mono text-slate-700">
-                      {msg.numero || "N/A"}
-                    </TableCell>
-                    <TableCell className="text-slate-600">
-                      {msg.data_envio && msg.data_envio !== "null"
-                        ? format(parseISO(msg.data_envio), "dd/MM/yyyy HH:mm", { locale: ptBR })
-                        : "N/A"}
-                    </TableCell>
-                    <TableCell className="text-slate-600">
-                      {msg.template || "N/A"}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {filteredMensagens.map((msg) => {
+                  // Use msg.id se existir, senão combine campos únicos
+                  const rowKey = msg.id || `${msg.numero}-${msg.data_envio}`;
+                  // Validação de data
+                  let dataEnvioFormatada = "N/A";
+                  if (msg.data_envio && msg.data_envio !== "null") {
+                    const parsed = parseISO(msg.data_envio);
+                    if (!isNaN(parsed.getTime())) {
+                      dataEnvioFormatada = format(parsed, "dd/MM/yyyy HH:mm", { locale: ptBR });
+                    }
+                  }
+                  return (
+                    <TableRow key={rowKey} className="hover:bg-slate-50/50 transition-colors">
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          {getStatusIcon(msg.status)}
+                          <Badge className={`${getStatusColor(msg.status)} border`}>
+                            {msg.status || "N/A"}
+                          </Badge>
+                        </div>
+                      </TableCell>
+                      <TableCell className="font-medium text-slate-900">
+                        {msg.nome_cliente || "N/A"}
+                      </TableCell>
+                      <TableCell className="text-slate-700">
+                        {msg.corretor_envio || "N/A"}
+                      </TableCell>
+                      <TableCell className="font-mono text-slate-700">
+                        {msg.numero || "N/A"}
+                      </TableCell>
+                      <TableCell className="text-slate-600">
+                        {dataEnvioFormatada}
+                      </TableCell>
+                      <TableCell className="text-slate-600">
+                        {msg.template || "N/A"}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </div>
