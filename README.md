@@ -4,6 +4,22 @@
 
 **URL**: https://lovable.dev/projects/f0bce951-05e4-4fa3-8cf2-c18f39a55062
 
+## Project description
+
+This repository contains a simple KPI dashboard used to track sales team
+performance. The interface displays key indicators, conversion rates and a
+performance table for brokers. You can run it locally using the following npm
+scripts:
+
+```sh
+npm run dev      # start the development server
+npm run build    # create a production build
+npm run preview  # preview the production build
+```
+
+Mock data for the charts and tables lives in `src/hooks/useDashboardData.ts` and
+additional CSV examples can be found under `src/data`.
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
@@ -35,6 +51,12 @@ npm i
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
+
+## Running the development server
+
+After installing dependencies, run `npm run dev` from the project root. Vite
+serves the dashboard on [http://localhost:8080](http://localhost:8080) and
+automatically reloads the page whenever you save changes.
 
 **Edit a file directly in GitHub**
 
