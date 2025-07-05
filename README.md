@@ -1,3 +1,18 @@
+# Dashboard KPI e Mensagens
+
+Este projeto é um painel de controle criado em React e TypeScript. Ele exibe KPIs de vendas e uma listagem de mensagens enviadas pelos corretores. Os dados são simulados a partir de arquivos localizados em `src/data`.
+
+## Como executar
+
+```sh
+npm install
+npm run dev
+```
+
+A aplicação será iniciada em modo desenvolvimento e poderá ser acessada no navegador.
+
+---
+
 # Welcome to your Lovable project
 
 ## Project info
